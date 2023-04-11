@@ -1,0 +1,27 @@
+.container_singup {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 205px;
+  background-color: var(--white);
+  border: 1px solid #cccccc;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.container_singup > h2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  margin-bottom: 24px;
+}
+
+.container_main > .button,
+.container_singup > .button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  height: 32px;
+}

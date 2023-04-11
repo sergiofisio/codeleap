@@ -1,0 +1,23 @@
+button {
+  width: 120px;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  text-transform: uppercase;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--blue);
+}
+
+.inactive {
+  background-color: var(--background-color);
+  cursor: not-allowed;
+}
