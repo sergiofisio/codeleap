@@ -2,9 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 800px;
-  height: 100vh;
+  max-width: 800px;
+  height: 100%;
   background-color: var(--white);
+}
+
+.create_post {
+  width: 90vw;
+  max-width: 800px;
 }
 
 .header_create_post,
@@ -14,22 +19,30 @@
   justify-content: space-between;
   background-color: var(--blue);
   color: var(--white);
-  height: 80px;
-  padding: 0 24px;
+  height: 40px;
+  padding: 0 5%;
 }
 
-form {
-  width: 752px;
-  height: 334px;
+.header_create_post > h2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 26px;
+}
+
+.form_create {
+  width: 90%;
+  max-width: 800px;
+  height: auto;
 
   background: var(--white);
   border: 1px solid #999999;
   border-radius: 16px;
-  margin: 24px;
-  padding: 24px;
+  margin: 5%;
+  padding: 2rem;
 }
 
-form > h2 {
+.form_create > h2 {
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
@@ -37,7 +50,7 @@ form > h2 {
   margin-bottom: 24px;
 }
 
-form > .button {
+.form_create > .button {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -45,21 +58,27 @@ form > .button {
   height: 32px;
 }
 
-form > .button > button {
+.form_create > .button > button {
   text-transform: capitalize;
 }
 
 .posts {
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: overlay;
+  padding: 0 20px;
 }
 
 .post {
-  width: 752px;
+  width: 100%;
+  max-width: 800px;
   height: auto;
 
   border: 1px solid #999999;
   border-radius: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 5%;
 }
 
 .header_post {
@@ -67,7 +86,7 @@ form > .button > button {
 }
 
 .body_post {
-  padding: 24px;
+  padding: 5%;
 }
 
 .title_time {
@@ -97,4 +116,40 @@ form > .button > button {
   font-weight: 400;
 
   color: var(--black);
+}
+
+.icons > img {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container_main {
+    max-width: 100%;
+  }
+  .create_post {
+    width: 100vw;
+    max-width: 800px;
+  }
+  .form_create {
+    width: 100%;
+    margin: 5% 0;
+  }
+  .form_create > h2 {
+    font-size: 20px;
+  }
+  .header_create_post > h2 {
+    font-size: 1.2em;
+  }
+  .author,
+  .date,
+  .content {
+    font-size: 16px;
+  }
+  .posts {
+    padding: 0 10px;
+  }
+  .post {
+    max-width: 100%;
+    margin-bottom: 10%;
+  }
 }

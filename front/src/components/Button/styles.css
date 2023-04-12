@@ -3,7 +3,7 @@ button {
   height: 100%;
   border: none;
   border-radius: 8px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 
   font-style: normal;
   font-weight: 700;

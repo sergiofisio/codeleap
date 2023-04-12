@@ -1,0 +1,72 @@
+.body_modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--background-modal);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 660px;
+
+  background: var(--white);
+  border: 1px solid #999999;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.modal > h2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.modal_delete {
+  height: 146px;
+}
+
+.modal_edit {
+  height: 334px;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+  height: 32px;
+}
+
+.btn_cancel,
+.btn_delete {
+  margin-right: 16px;
+}
+
+.btn_cancel {
+  color: var(--black);
+  background-color: var(--white);
+  border: 1px solid #999999;
+}
+
+.btn_delete {
+  background-color: var(--red);
+}
+
+.btn_save {
+  background-color: var(--green);
+}
+
+.form_edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}

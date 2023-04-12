@@ -10,6 +10,7 @@ export default function Input({ label, type, placeholder, value, set }) {
                     id={label}
                     type={type}
                     placeholder={placeholder}
+                    autoComplete="off"
                     onChange={(e) => set(e.target.value)}
                     value={value}
                     required
@@ -19,9 +20,9 @@ export default function Input({ label, type, placeholder, value, set }) {
                     name={label}
                     placeholder={placeholder}
                     value={value}
+                    autoComplete="off"
                     onChange={(e) => set(e.target.value)}
-                    rows='4'
-                    cols='50'
+                    required
                 />}
         </div>
     )
