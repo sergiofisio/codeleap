@@ -4,12 +4,17 @@
   align-items: center;
   max-width: 800px;
   height: 100%;
-  background-color: var(--white);
+  background-color: var(--container_post);
 }
 
 .create_post {
   width: 90vw;
   max-width: 800px;
+}
+
+.icons_header > .mode {
+  position: inherit;
+  margin-right: 30px;
 }
 
 .header_create_post,
@@ -35,7 +40,7 @@
   max-width: 800px;
   height: auto;
 
-  background: var(--white);
+  background: var(--container_post);
   border: 1px solid #999999;
   border-radius: 16px;
   margin: 5%;

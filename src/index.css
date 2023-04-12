@@ -5,10 +5,12 @@
   --black: #000000;
   --border: #777777;
   --blue: #7695ec;
+  --container_post: #ffffff;
   --white: #ffffff;
   --red: #ff5151;
   --green: #47b960;
   --background-modal: rgba(119, 119, 119, 0.8);
+  --btn_block: #dddddd;
 }
 
 * {

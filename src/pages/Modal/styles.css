@@ -15,8 +15,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 660px;
-
+  width: 90vw;
+  max-width: 660px;
   background: var(--white);
   border: 1px solid #999999;
   border-radius: 16px;
@@ -26,12 +26,14 @@
 .modal > h2 {
   font-style: normal;
   font-weight: 700;
-  font-size: 22px;
-  line-height: 26px;
+  font-size: 1.5rem;
+  line-height: 1.2;
 }
 
 .modal_delete {
   height: 146px;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .modal_edit {
@@ -39,14 +41,16 @@
 }
 
 .btn {
+  width: 100%;
   display: flex;
-  justify-content: flex-end;
   height: 32px;
+  justify-content: flex-end;
+  flex-direction: row;
 }
 
 .btn_cancel,
 .btn_delete {
-  margin-right: 16px;
+  margin-right: 2%;
 }
 
 .btn_cancel {

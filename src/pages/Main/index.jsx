@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import darkMode from '../../assets/dark-mode-main.svg';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
+import lighMode from '../../assets/light-mode-main.svg';
+import logout from '../../assets/logout.svg';
 import Button from '../../components/Button';
 import Input from '../../components/input';
-import { default as axios, default as axiosPrivate } from "../../service/api";
-import { getItem } from '../../utils/storage';
+import axiosPrivate from "../../service/api";
+import { getItem, removeItem, setItem } from '../../utils/storage';
 import Modal from '../Modal';
 import './styles.css';
 
 export default function Main() {
-    const [allPost, setAllPost] = useState([])
+    const navigate = useNavigate();
+    const root = document.querySelector(":root");
+    const [mode, setMode] = useState(getItem('mode') || '')
     const [data, setData] = useState([])
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -23,7 +29,7 @@ export default function Main() {
 
     async function getPost() {
         try {
-            const { data: { results } } = await axios.get('careers/?limit=1000&offset=0')
+            const { data: { results } } = await axiosPrivate.get('careers/?limit=1000&offset=0')
             setData(results)
         } catch (error) {
             console.log(error.message);
@@ -59,8 +65,31 @@ export default function Main() {
         })
     }
 
+    function handleLogout() {
+        removeItem('username')
+        navigate('/')
+    }
+
+    function handleMode() {
+
+        if (mode === 'light') {
+            setMode('dark')
+            setItem('mode', mode)
+            root.style.setProperty('--background-color', '#000')
+            root.style.setProperty('--container_post', '#dddddd')
+            root.style.setProperty('--grey', '#000')
+        } else {
+            setItem('mode', mode)
+            setMode('light')
+            root.style.setProperty('--background-color', '#dddddd')
+            root.style.setProperty('--container_post', '#fff')
+            root.style.setProperty('--grey', '#dddddd')
+        }
+    }
+
 
     useEffect(() => {
+        handleMode()
         getPost()
         const interval = setInterval(() => {
             getPost()
@@ -71,7 +100,13 @@ export default function Main() {
     return (
         <div className="container_main">
             <div className="create_post">
-                <div className="header_create_post"><h2>CodeLeap Network</h2></div>
+                <div className="header_create_post">
+                    <h2>CodeLeap Network</h2>
+                    <div className="icons_header">
+                        <img className='mode' onClick={handleMode} src={mode === 'light' ? lighMode : darkMode} alt={`icone ${mode} mode`} />
+                        <img onClick={handleLogout} src={logout} alt="logout" />
+                    </div>
+                </div>
                 <form className='form_create' onSubmit={handleSubmit}>
                     <h2>What’s on your mind?</h2>
                     <Input label='Title' type='text' placeholder='title' set={setTitle} value={title} />
