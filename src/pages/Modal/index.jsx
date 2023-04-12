@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Zoom, toast } from 'react-toastify';
 import Button from '../../components/Button';
 import Input from '../../components/input';
 import axiosPrivate from '../../service/api';
@@ -36,7 +37,15 @@ export default function Modal({ id, setModal, type }) {
             )
             setTitle('')
             setContent('')
-            setModal(false)
+            toast.success(`Post alterado com sucesso`, {
+                position: toast.POSITION.TOP_RIGHT,
+                transition: Zoom,
+                pauseOnHover: false,
+                autoClose: 3000
+            })
+            setTimeout(() => {
+                setModal(false)
+            }, 4000)
         } catch (error) {
             console.log(error);
         }
@@ -45,7 +54,15 @@ export default function Modal({ id, setModal, type }) {
     async function handelDelete() {
         try {
             await axiosPrivate.delete(`careers/${id}/`)
-            setModal(false)
+            toast.error(`Post deletado com sucesso`, {
+                position: toast.POSITION.TOP_RIGHT,
+                transition: Zoom,
+                pauseOnHover: false,
+                autoClose: 3000
+            })
+            setTimeout(() => {
+                setModal(false)
+            }, 4000)
         } catch (error) {
             console.log(error);
         }
@@ -53,7 +70,7 @@ export default function Modal({ id, setModal, type }) {
 
     useEffect(() => {
         getPost()
-    }, [])
+    })
 
     return (
         <div className='body_modal'>

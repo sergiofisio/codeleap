@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import darkMode from '../../assets/dark-mode-main.svg';
+import { ToastContainer, Zoom, toast } from 'react-toastify';
 import deleteIcon from '../../assets/delete.svg';
 import editIcon from '../../assets/edit.svg';
-import lighMode from '../../assets/light-mode-main.svg';
 import logout from '../../assets/logout.svg';
 import Button from '../../components/Button';
 import Input from '../../components/input';
 import axiosPrivate from "../../service/api";
-import { getItem, removeItem, setItem } from '../../utils/storage';
+import { getItem, removeItem } from '../../utils/storage';
 import Modal from '../Modal';
 import './styles.css';
 
 export default function Main() {
     const navigate = useNavigate();
-    const root = document.querySelector(":root");
-    const [mode, setMode] = useState(getItem('mode') || '')
     const [data, setData] = useState([])
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -50,6 +47,12 @@ export default function Main() {
             )
             setTitle('')
             setContent('')
+            toast.success(`Post criado com sucesso`, {
+                position: toast.POSITION.TOP_RIGHT,
+                transition: Zoom,
+                pauseOnHover: false,
+                autoClose: 3000
+            })
             getPost()
         } catch (error) {
             console.log(error);
@@ -67,43 +70,60 @@ export default function Main() {
 
     function handleLogout() {
         removeItem('username')
-        navigate('/')
+        toast.success(`Até logo ${user}`, {
+            position: toast.POSITION.TOP_RIGHT,
+            transition: Zoom,
+            pauseOnHover: false,
+            autoClose: 4000
+        });
+        setTimeout(() => {
+            navigate("/");
+        }, 5000);
     }
 
-    function handleMode() {
+    function dateFormat(date) {
+        let seconds = Math.floor((new Date() - new Date(date)) / 1000)
+        let interval = seconds / 31536000
 
-        if (mode === 'light') {
-            setMode('dark')
-            setItem('mode', mode)
-            root.style.setProperty('--background-color', '#000')
-            root.style.setProperty('--container_post', '#dddddd')
-            root.style.setProperty('--grey', '#000')
-        } else {
-            setItem('mode', mode)
-            setMode('light')
-            root.style.setProperty('--background-color', '#dddddd')
-            root.style.setProperty('--container_post', '#fff')
-            root.style.setProperty('--grey', '#dddddd')
+        if (interval > 1) {
+            return Math.floor(interval) + " years ago";
         }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+            return Math.floor(interval) + " months ago";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+            return Math.floor(interval) + " days ago";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+            return Math.floor(interval) + " hours ago";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+            return Math.floor(interval) + " minutes ago";
+        }
+
+        return Math.floor(seconds) + " seconds ago";
     }
 
 
     useEffect(() => {
-        handleMode()
         getPost()
         const interval = setInterval(() => {
             getPost()
-        }, 10000)
+        }, 30000)
         return () => clearInterval(interval)
     }, [modal])
 
     return (
         <div className="container_main">
+            <ToastContainer />
             <div className="create_post">
                 <div className="header_create_post">
                     <h2>CodeLeap Network</h2>
                     <div className="icons_header">
-                        <img className='mode' onClick={handleMode} src={mode === 'light' ? lighMode : darkMode} alt={`icone ${mode} mode`} />
                         <img onClick={handleLogout} src={logout} alt="logout" />
                     </div>
                 </div>
@@ -134,7 +154,9 @@ export default function Main() {
                             <div className="body_post">
                                 <div className="title_time">
                                     <h2 className="author">@{username}</h2>
-                                    <h2 className='date'>{created_datetime}</h2>
+                                    <h2 className='date'>
+                                        {dateFormat(created_datetime)}
+                                    </h2>
                                 </div>
                                 <p className="content">{content}</p>
                             </div>

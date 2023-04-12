@@ -17,6 +17,10 @@
   margin-right: 30px;
 }
 
+.icons_header > img {
+  cursor: pointer;
+}
+
 .header_create_post,
 .header_post {
   display: flex;
